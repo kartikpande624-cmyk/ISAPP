@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ISAPP — Student Portal</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<section class="auth-wrap" id="authScreen">
+  <div class="auth-hero">
+    <div class="brand" style="border:0;padding:0;margin:0"><div class="bicon">🎓</div><div><div class="bname">ISAPP</div><div class="bsub" style="color:var(--muted)">Student Academic & Profile Portal</div></div></div>
+    <h1>Your college stuff,<br>finally in one place.</h1>
+    <p>Track attendance, Minor/Major/Quiz marks, your custom timetable, skills, and classmates.</p>
+    <div class="chips"><span class="chip">Attendance & Exams</span><span class="chip">Custom Timetable</span><span class="chip">Skill Badges & Ranks</span></div>
+  </div>
+  <div class="auth-card">
+    <h2>Welcome to ISAPP</h2><p id="authSub">Sign in or create your student account.</p>
+    <button type="button" class="gbtn" onclick="signInWithGoogle()">Continue with Google (Gmail)</button>
+    <div class="div">or use Email & Password</div>
+    <div class="trow"><button type="button" class="tbtn active" id="tLog" onclick="setTab('login')">Log In</button><button type="button" class="tbtn" id="tSig" onclick="setTab('signup')">Create Account</button></div>
+    <form onsubmit="authSub(event)">
+      <div id="suBox" class="hidden">
+        <div class="fld"><label>Full Name</label><input id="suName" placeholder="e.g. Riya Verma"></div>
+        <div class="fg" style="margin-bottom:10px"><div class="fld"><label>Branch</label><select id="suBranch"><option>CST</option><option>CSE</option><option>IT</option><option>ECE</option><option>ME</option></select></div><div class="fld"><label>Year</label><select id="suYear"><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></div></div>
+      </div>
+      <div class="fld"><label>Gmail / Email</label><input id="auMail" type="email" required placeholder="yourname@gmail.com"></div>
+      <div class="fld"><label>Password (6+ chars)</label><input id="auPass" type="password" required minlength="6" placeholder="At least 6 characters"></div>
+      <button type="submit" class="btn pri" style="width:100%;padding:10px" id="auBtn">Log In →</button>
+    </form>
+    <div id="auMsg" class="amsg hidden"></div>
+  </div>
+</section>
+
+<div class="app hidden" id="appRoot">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><div class="bicon">🎓</div><div><div class="bname">ISAPP</div><div class="bsub">Student Portal</div></div></div>
+    <nav class="nav" id="mainNav">
+      <button class="nbtn active" data-page="dashboard">🏠 Dashboard</button>
+      <button class="nbtn" data-page="profile">👤 My Profile</button>
+      <button class="nbtn" data-page="attendance">✅ Attendance</button>
+      <button class="nbtn" data-page="results">📝 Results & Exams</button>
+      <button class="nbtn" data-page="directory">👥 Classmates <span class="ncnt" id="dirCount">0</span></button>
+      <button class="nbtn" data-page="timetable">📅 Timetable</button>
+      <button class="nbtn" data-page="achievements">🏆 Achievements</button>
+    </nav>
+    <div class="sbot">
+      <button class="nbtn" data-page="settings">⚙️ Settings</button>
+      <button class="nbtn" onclick="signOut()">🚪 Log Out</button>
+      <div class="sprof"><div class="av" id="sAv">ST</div><div><div class="mname" id="sName">Student</div><div class="mmeta" id="sMeta">1st Year</div></div></div>
+      <div class="sfoot">● <span id="sMode">Connected</span></div>
+    </div>
+  </aside>
+  <button class="scrim" id="scrim"></button>
+  <main class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:10px"><button class="ibtn" id="mBtn">☰</button><div class="crumb" id="crumb">Dashboard</div></div>
+      <div class="topr"><button class="sbtn" id="qSrch">🔍 Search classmates...</button><span class="spill" id="cBadge">Connected</span><button onclick="go('profile')" style="border:0;background:none;padding:0"><div class="av sm" id="tAv">ST</div></button></div>
+    </header>
+    <div class="content" id="content"></div>
+  </main>
+</div>
+<div id="modalRoot"></div><div id="toastRoot"></div>
+
+<script>
+  const SUPABASE_URL = "https://nczuzjhkqvvycinreajl.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_2TRmacywkMMi_4xK7nQOuQ_C6pWZj9M";
+</script>
+<script src="app.js"></script>
+</body>
+</html>
